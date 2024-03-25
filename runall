@@ -5,6 +5,8 @@ set -e
 poetry install
 printf '\n'
 poetry env list
+printf '\n'
+poetry run python -V
 
 for script in mplocal \
               mplocal-monolithic \
