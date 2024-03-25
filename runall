@@ -3,6 +3,8 @@
 set -e
 
 poetry install
+printf '\n'
+poetry env list
 
 for script in mplocal \
               mplocal-monolithic \
