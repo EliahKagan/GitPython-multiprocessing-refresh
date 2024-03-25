@@ -21,3 +21,5 @@ GitPython = { git = "https://github.com/gitpython-developers/GitPython.git", bra
 git = "gpmpr.fake_broken_git:main"
 mplocal = "gpmpr.mplocal:main"
 mpglobal = "gpmpr.mpglobal:main"
+mplocal-monolithic = "gpmpr.mplocal_monolithic:main"
+mpglobal-monolithic = "gpmpr.mpglobal_monolithic:main"

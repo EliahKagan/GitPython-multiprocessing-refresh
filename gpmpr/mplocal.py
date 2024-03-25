@@ -1,4 +1,4 @@
-"""See how locally calling GitPython's git.refresh() interacts with multiprocessing."""
+"""See how locally calling git.refresh() interacts with multiprocessing."""
 
 __all__ = ["main"]
 

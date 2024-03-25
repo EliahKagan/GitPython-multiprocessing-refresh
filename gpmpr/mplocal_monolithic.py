@@ -1,9 +1,6 @@
-"""See how GitPython's git.refresh() interacts with multiprocessing.
+"""See locally calling git.refresh() interacts with multiprocessing, in one module."""
 
-This is imported by the public ``gpmpr.mp*`` modules.
-"""
-
-__all__ = ["run_experiment"]
+__all__ = ["main"]
 
 import concurrent.futures
 import multiprocessing
@@ -16,8 +13,10 @@ def _get_version(g: git.Git) -> str:
     return g.version()
 
 
-def run_experiment() -> None:
+def _run_experiment() -> None:
     """Use ``Git.version`` here and also by the three multiprocessing start methods."""
+    git.refresh("/usr/bin/git")  # TODO: Somehow avoid hard-coding this path.
+
     g = git.Git()
     ver = _get_version(g)
     print(f"In parent process: {ver}")
@@ -29,3 +28,8 @@ def run_experiment() -> None:
         ) as executor:
             ver = executor.submit(_get_version, g).result()
             print(f"In child process ({method}): {ver}")
+
+
+def main() -> None:
+    """Run the experiment."""
+    _run_experiment()
