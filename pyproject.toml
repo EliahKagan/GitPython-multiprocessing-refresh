@@ -1,0 +1,21 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "gitpython-multiprocessing-refresh"
+version = "0.1.0"
+description = "Investigate how GitPython refresh() interacts with multiprocessing"
+authors = ["Eliah Kagan <degeneracypressure@gmail.com>"]
+license = "0BSD"
+readme = "README.md"
+packages = [
+    { include = "gpmpr" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+GitPython = { git = "https://github.com/gitpython-developers/GitPython.git", branch = "main" }
+
+[tool.poetry.scripts]
+git = "gpmpr.fake_broken_git:main"
