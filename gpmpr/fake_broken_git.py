@@ -7,4 +7,9 @@ from typing import NoReturn
 
 
 def main() -> NoReturn:
+    if sys.argv[1:] == ["version"]:
+        print("fake git 99.999.9")
+        sys.exit(0)
+
+    print(f"error: fake git only supports 'git version'")
     sys.exit(1)
