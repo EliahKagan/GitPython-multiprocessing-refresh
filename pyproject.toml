@@ -19,4 +19,5 @@ GitPython = { git = "https://github.com/gitpython-developers/GitPython.git", bra
 
 [tool.poetry.scripts]
 git = "gpmpr.fake_broken_git:main"
-mp = "gpmpr.mp:main"
+mplocal = "gpmpr.mplocal:main"
+mpglobal = "gpmpr.mpglobal:main"

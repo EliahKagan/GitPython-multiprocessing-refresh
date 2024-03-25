@@ -15,7 +15,7 @@ def get_version(g: git.Git) -> str:
 
 def main() -> None:
     """Run the demo."""
-    git.refresh("/usr/bin/git")  # TODO: Somehow avoid hard-coding this.
+    git.refresh("/usr/bin/git")  # TODO: Somehow avoid hard-coding this path.
     g = git.Git()
     ver = get_version(g)
     print(f"In parent process: {ver}")
