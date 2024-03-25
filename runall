@@ -2,6 +2,8 @@
 
 set -e
 
+poetry install
+
 first_format='%s:\n\n'
 later_format='\n\n%s:\n\n'
 format="$first_format"
