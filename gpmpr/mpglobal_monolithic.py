@@ -1,4 +1,6 @@
-"""See globally calling git.refresh() interacts with multiprocessing, in one module."""
+"""
+See how globally calling git.refresh() interacts with multiprocessing, in one module.
+"""
 
 __all__ = ["main"]
 

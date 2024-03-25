@@ -1,5 +1,6 @@
 """
-See how locally calling git.refresh() interacts with multiprocessing, in one module.
+See how locally calling git.refresh() interacts with multiprocessing, with everything
+in one module except the payload to invoke.
 """
 
 __all__ = ["main"]
@@ -9,18 +10,15 @@ import multiprocessing
 
 import git
 
+from . import _payload
 
-def _get_version(g: git.Git) -> str:
-    """Call ``g.version()``. This helps since ``g.version`` is an unpicklable lambda."""
-    return g.version()
+git.refresh("/usr/bin/git")  # TODO: Somehow avoid hard-coding this path.
 
 
 def _run_experiment() -> None:
     """Use ``Git.version`` here and also by the three multiprocessing start methods."""
-    git.refresh("/usr/bin/git")  # TODO: Somehow avoid hard-coding this path.
-
     g = git.Git()
-    ver = _get_version(g)
+    ver = _payload.get_version(g)
     print(f"In parent process: {ver}")
 
     for method in "fork", "spawn", "forkserver":
@@ -28,7 +26,7 @@ def _run_experiment() -> None:
             max_workers=1,
             mp_context=multiprocessing.get_context(method),
         ) as executor:
-            ver = executor.submit(_get_version, g).result()
+            ver = executor.submit(_payload.get_version, g).result()
             print(f"In child process ({method}): {ver}")
 
 
