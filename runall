@@ -4,10 +4,6 @@ set -e
 
 poetry install
 
-first_format='%s:\n\n'
-later_format='\n\n%s:\n\n'
-format="$first_format"
-
 for script in mplocal \
               mplocal-monolithic \
               mplocal-separate-payload \
@@ -15,7 +11,6 @@ for script in mplocal \
               mpglobal-monolithic \
               mpglobal-separate-payload
 do
-    printf "$format" "$script"
+    printf "\n\n%s:\n\n" "$script"
     poetry run "$script"
-    format="$later_format"
 done
