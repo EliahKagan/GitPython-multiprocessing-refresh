@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+first_format='%s:\n\n'
+later_format='\n\n%s:\n\n'
+format="$first_format"
+
+for script in mplocal \
+              mplocal-monolithic \
+              mplocal-separate-payload \
+              mpglobal \
+              mpglobal-monolithic \
+              mpglobal-separate-payload
+do
+    printf "$format" "$script"
+    poetry run "$script"
+    format="$later_format"
+done
