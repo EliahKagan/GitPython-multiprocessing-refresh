@@ -11,7 +11,7 @@
 
 set -e
 
-poetry install
+poetry install --only=main  # If other groups were installed, they can remain.
 printf '\n'
 poetry env list
 printf '\n'

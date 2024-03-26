@@ -17,6 +17,18 @@ packages = [
 python = "^3.7"
 GitPython = { git = "https://github.com/gitpython-developers/GitPython.git", branch = "main" }
 
+[tool.poetry.group.dev.dependencies]
+isort = [
+    { version = "~5.11.5", python = "~3.7" },
+    { version = "^5.13.2", python = ">3.8,<4.0" },
+]
+mypy = [
+    { version = "~1.4.1", python = "~3.7" },
+    { version = "^1.9.0", python = ">=3.8,<4.0" },
+]
+pyright = "^1.1.355"
+ruff = "^0.3.4"
+
 [tool.poetry.scripts]
 git = "gpmpr.fake_broken_git:main"
 mplocal = "gpmpr.mplocal:main"
@@ -25,3 +37,21 @@ mplocal-separate-payload = "gpmpr.mplocal_separate_payload:main"
 mpglobal = "gpmpr.mpglobal:main"
 mpglobal-monolithic = "gpmpr.mpglobal_monolithic:main"
 mpglobal-separate-payload = "gpmpr.mpglobal_separate_payload:main"
+
+[tool.mypy]
+python_version = "3.8"  # Since new versions don't support 3.7.
+disallow_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+
+[tool.isort]
+atomic = true
+force_sort_within_sections = true
+include_trailing_comma = true
+multi_line_output = 3
+
+[tool.ruff]
+target-version = "py37"
+line-length = 88
+lint.extend-select = ["E", "W", "F", "S", "B"]

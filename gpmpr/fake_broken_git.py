@@ -11,5 +11,5 @@ def main() -> NoReturn:
         print("FAKE git 99.999.9")
         sys.exit(0)
 
-    print(f"error: fake git only supports 'git version'")
+    print("error: fake git only supports 'git version'")
     sys.exit(1)
