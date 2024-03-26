@@ -152,3 +152,7 @@ not support Windows, that may not be a priority.)
 
 Results of running `./runall` on an Ubuntu 22.04.4 LTS system running Python
 3.12.2 are saved as [`results.txt`](results.txt).
+
+The separate `filter` script may sometimes be useful in comparing the most
+important parts of those results and results found on a different system or
+Python version.

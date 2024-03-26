@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# Shell script to filter out site and version specific information from output
+# of "runall", so that diffs will show only variations in experiments' results.
+#
+# Usage (if your shell supports process substitution):
+#
+#    diff <(./filter results.txt) <(./filter my-results.txt)
+#
+# Or even:
+#
+#    diff <(./filter results.txt) <(./runall | ./filter)
+
+sed -En '/mp[[:alpha:]-]+:/,${s/\b[[:digit:]].*/.../;p}' "$@"

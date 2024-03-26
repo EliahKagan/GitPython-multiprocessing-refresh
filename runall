@@ -1,4 +1,13 @@
 #!/bin/sh
+#
+# Shell script to run all the experiment scripts and show the results.
+#
+# Usage:
+#
+#    ./runall
+#
+# This should be run from the top-level directory of the repository, i.e., the
+# directory that contains it and pyproject.toml (among other files).
 
 set -e
 
