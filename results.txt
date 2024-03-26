@@ -1,0 +1,57 @@
+Installing dependencies from lock file
+
+No dependencies to install or update
+
+Installing the current project: gitpython-multiprocessing-refresh (0.1.0)
+
+gitpython-multiprocessing-refresh-6OhAJ0kt-py3.12 (Activated)
+
+Python 3.12.2
+
+
+mplocal:
+
+In parent process: git version 2.34.1
+In child process (fork): git version 2.34.1
+In child process (spawn): FAKE git 99.999.9
+In child process (forkserver): FAKE git 99.999.9
+
+
+mplocal-monolithic:
+
+In parent process: git version 2.34.1
+In child process (fork): git version 2.34.1
+In child process (spawn): FAKE git 99.999.9
+In child process (forkserver): FAKE git 99.999.9
+
+
+mplocal-separate-payload:
+
+In parent process: git version 2.34.1
+In child process (fork): git version 2.34.1
+In child process (spawn): FAKE git 99.999.9
+In child process (forkserver): FAKE git 99.999.9
+
+
+mpglobal:
+
+In parent process: git version 2.34.1
+In child process (fork): git version 2.34.1
+In child process (spawn): FAKE git 99.999.9
+In child process (forkserver): FAKE git 99.999.9
+
+
+mpglobal-monolithic:
+
+In parent process: git version 2.34.1
+In child process (fork): git version 2.34.1
+In child process (spawn): git version 2.34.1
+In child process (forkserver): git version 2.34.1
+
+
+mpglobal-separate-payload:
+
+In parent process: git version 2.34.1
+In child process (fork): git version 2.34.1
+In child process (spawn): FAKE git 99.999.9
+In child process (forkserver): FAKE git 99.999.9
