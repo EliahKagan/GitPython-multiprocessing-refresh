@@ -2,22 +2,30 @@
 
 This investigates the interaction between:
 
-- GitPython's "refresh" functionality that sets global state about the `git`
-  executable to be used.
-- The Python standard library's `multiprocessing` feature, which GitPython
-  attempts to be compatible with (such as by making objects support pickling).
+- [GitPython](https://github.com/gitpython-developers/GitPython)'s
+  ["refresh"](https://gitpython.readthedocs.io/en/latest/reference.html#git.refresh)
+  functionality that sets global state about the `git` executable to be used.
+- The Python standard library's
+  [`multiprocessing`](https://docs.python.org/3/library/multiprocessing.html)
+  feature, which GitPython attempts to be compatible with (such as by making
+  objects support pickling).
 
 ## License
 
 The contents of this repository, including the code and this readme, are
-licensed under [0BSD](https://spdx.org/licenses/0BSD.html), a "public domain
-equivalent" license that imposes no restrictions. This is the same license that
-is (as of this writing) used for code examples in Python's documentation. See
-[**`LICENSE`**](LICENSE) for details.
+licensed under [0BSD](https://spdx.org/licenses/0BSD.html), a [“public domain
+equivalent”](https://en.wikipedia.org/wiki/Public-domain-equivalent_license)
+license that imposes no restrictions. This is the same license
+[used for code examples in Python's
+documentation](https://docs.python.org/3/license.html#terms-and-conditions-for-accessing-or-otherwise-using-python).
+
+See [**`LICENSE`**](LICENSE) for details.
 
 ## Background
 
-Python supports three *start methods* for multiprocessing:
+Python supports three [*start
+methods*](https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods)
+for multiprocessing:
 
 - `fork`: Extensive state from the parent process is in workers automatically.
 - `spawn`: The interpreter is rerun from the beginning and imports modules.
@@ -31,11 +39,12 @@ already the default on macOS, where `fork` does not work well, and on Windows,
 where `fork` and `forkserver` are unavailable since Windows has no *fork*
 system call.
 
-All three methods should be expected to work with the automatic `git.refresh`
-when it defaults to the command name `"git"` or uses a path or other command
-name it finds as the value of the `GIT_PYTHON_GIT_EXECUTABLE` environment
-variable. However, another way to provide a path to use for the git command
-is to pass it as an arugment to `git.refresh`.
+All three methods should be expected to work with the
+[automatic](https://github.com/gitpython-developers/GitPython/blob/64ec0b1f86ada5565e30bc21b4ad189c6c4df49e/git/__init__.py#L222)
+`git.refresh` when it defaults to the command name `"git"` or uses a path or
+other command name it finds as the value of the `GIT_PYTHON_GIT_EXECUTABLE`
+environment variable. However, another way to provide a path to use for the
+git command is to pass it as an argument to `git.refresh`.
 
 ## The question
 
@@ -44,8 +53,9 @@ The question is, when...
 1. The desired git executable path is given to GitPython by calling
    `git.refresh(<path>)`.
 2. Then `multiprocessing` is used (incuding via higher level abstractions such
-   as `concurrent.futures.ProcessPoolExecutor`) to create one or more worker
-   processes.
+   as
+   [`concurrent.futures.ProcessPoolExecutor`](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor))
+   to create one or more worker processes.
 3. The worker processes use GitPython.
 
 *...does GitPython in the worker processes have the `<path>` that was passed to
@@ -62,9 +72,11 @@ get the desired state into the worker process, it happens when *either*:
   top-level code.
 
 With the `fork` start method, most program state is duplicated, including the
-class attributes of GitPython's `git.cmd.Git` class, such as the
-`GIT_PYTHON_GIT_EXECUTABLE` attribute that holds the path chosen in
-`git.refresh`.
+class attributes of GitPython's
+[`git.cmd.Git`](https://github.com/gitpython-developers/GitPython/blob/64ec0b1f86ada5565e30bc21b4ad189c6c4df49e/git/cmd.py#L311)
+class, such as the
+[`GIT_PYTHON_GIT_EXECUTABLE`](https://github.com/gitpython-developers/GitPython/blob/64ec0b1f86ada5565e30bc21b4ad189c6c4df49e/git/cmd.py#L384)
+attribute that holds the path chosen in `git.refresh`.
 
 Otherwise, most program state is not duplicated, and instead worker processes
 import the modules they need. Although this does cause `git.refresh` to be
@@ -95,7 +107,6 @@ Finally, note that:
   support pickle serialization and deserialization and can be passed to worker
   processes. But that does not affect whether the effect of `git.refresh` is
   reflected in operations carried out through them.
-
 - This is essentially unrelated to how separate processes in multiprocessing
   do not automatically share global state with each other and all have separate
   global variables and class attributes. That's a fundamental point of how
