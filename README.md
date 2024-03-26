@@ -30,14 +30,15 @@ for multiprocessing:
 - `fork`: Extensive state from the parent process is in workers automatically.
 - `spawn`: The interpreter is rerun from the beginning and imports modules.
 - `forkserver`: A separate process with minimal state (the "server") is
-  maintained and caused to fork off subprocesse as needed.
+  maintained and caused to fork off subprocess as needed.
 
 `fork` is the default method on GNU/Linux systems as of this writing, but that
-is planned to change to `spawn` in Python 3.14 because of its incompatibility
-with threading (that is, with multithreading being used *at all*). `spawn` is
-already the default on macOS, where `fork` does not work well, and on Windows,
-where `fork` and `forkserver` are unavailable since Windows has no *fork*
-system call.
+is [planned to change to `spawn` in Python
+3.14](https://github.com/python/cpython/issues/84559) because of its
+incompatibility with threading (that is, with multithreading being used *at
+all*). `spawn` is already the default on macOS, where `fork` does not work
+well, and on Windows, where `fork` and `forkserver` are unavailable since
+Windows has no *fork* system call.
 
 All three methods should be expected to work with the
 [automatic](https://github.com/gitpython-developers/GitPython/blob/64ec0b1f86ada5565e30bc21b4ad189c6c4df49e/git/__init__.py#L222)
@@ -52,7 +53,7 @@ The question is, when...
 
 1. The desired git executable path is given to GitPython by calling
    `git.refresh(<path>)`.
-2. Then `multiprocessing` is used (incuding via higher level abstractions such
+2. Then `multiprocessing` is used (including via higher level abstractions such
    as
    [`concurrent.futures.ProcessPoolExecutor`](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor))
    to create one or more worker processes.
@@ -104,7 +105,7 @@ It does not happen:
 Finally, note that:
 
 - The state set by refreshing is global. Local state, such as `Git` instances,
-  support pickle serialization and deserialization and can be passed to worker
+  supports pickle serialization and deserialization and can be passed to worker
   processes. But that does not affect whether the effect of `git.refresh` is
   reflected in operations carried out through them.
 - This is essentially unrelated to how separate processes in multiprocessing
