@@ -157,3 +157,7 @@ Results of running `./runall` on an Ubuntu 22.04.4 LTS system running Python
 The separate `filter` script may sometimes be useful in comparing the most
 important parts of those results and results found on a different system or
 Python version.
+
+The experiments, and comparison across versions, are also done automatically
+[using GitHub Actions](.github/workflows/main.yml), with the [results
+available](https://github.com/EliahKagan/GitPython-multiprocessing-refresh/actions/workflows/main.yml).
